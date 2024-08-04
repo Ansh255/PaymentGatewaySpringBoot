@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 public class StudentController {
@@ -26,5 +25,13 @@ public class StudentController {
     public ResponseEntity<StudentOrder> createOrder(@RequestBody StudentOrder studentOrder)throws  Exception{
     StudentOrder createdOrder = studentService.createOrder(studentOrder);
     return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/handle-payment-callback")
+    public String handlePaymentCallBack(@RequestParam Map<String,String> responsePayLoad) {
+        System.out.println(responsePayLoad);
+        StudentOrder updateOrder = studentService.updateOrder(responsePayLoad);
+        System.out.println("Updated Order"+ updateOrder);
+        return "success";
     }
 }

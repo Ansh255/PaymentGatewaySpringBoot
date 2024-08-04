@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.razorpay.RazorpayClient;
 
+import java.util.Map;
+
 @Service
 public class StudentService {
+
     @Autowired
     private StudentOrderRepo studentOrderRepo;
 
@@ -38,7 +41,7 @@ public class StudentService {
         System.out.println(razorPayOrder);
 
         // Getting the id from Razorpay and setting for storing in the database
-        studentOrder.setRazorPayOrderId(razorPayOrder.get("id"));
+        studentOrder.setRazorpayOrderId(razorPayOrder.get("id"));
         studentOrder.setOrderStatus(razorPayOrder.get("status"));
 
         // Saving the information in the database and returning the object
@@ -46,4 +49,11 @@ public class StudentService {
         return studentOrder;
     }
 
+    public StudentOrder updateOrder(Map<String, String> responsePayLoad) {
+        String razorPayOrderId = responsePayLoad.get("razorpay_order_id");
+        StudentOrder orderData = studentOrderRepo.findByRazorpayOrderId(razorPayOrderId);
+        orderData.setOrderStatus("PAYMENT_COMPLETED");
+        StudentOrder updatedOrder = studentOrderRepo.save(orderData);
+        return updatedOrder;
+    }
 }

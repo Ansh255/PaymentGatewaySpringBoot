@@ -13,7 +13,7 @@ public class StudentOrder {
     private String course;
     private Integer amount;
     private String orderStatus;
-    private String razorPayOrderId;
+    private String razorpayOrderId;
 
     public Integer getOrderId() {
         return orderId;
@@ -63,13 +63,14 @@ public class StudentOrder {
         this.orderStatus = orderStatus;
     }
 
-    public String getRazorPayOrderId() {
-        return razorPayOrderId;
+    public String getRazorpayOrderId() {
+        return razorpayOrderId;
     }
 
-    public void setRazorPayOrderId(String razorPayOrderId) {
-        this.razorPayOrderId = razorPayOrderId;
+    public void setRazorpayOrderId(String razorpayOrderId) {
+        this.razorpayOrderId = razorpayOrderId;
     }
+
     @Override
     public String toString() {
         return "StudentOrder{" +
@@ -79,6 +80,6 @@ public class StudentOrder {
                 ", course='" + course + '\'' +
                 ", amount=" + amount +
                 ", orderStatus='" + orderStatus + '\'' +
-                ", razorPayOrderId='" + razorPayOrderId + '\'' +
+                ", razorPayOrderId='" + razorpayOrderId + '\'' +
                 '}';
     }}
