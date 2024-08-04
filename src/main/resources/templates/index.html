@@ -70,6 +70,7 @@
     }
 
     document.getElementById('button').onclick = async function(e) {
+<!--        //page does not get reload-->
         e.preventDefault();
         const order = await createOrder();
         console.log(order);
@@ -84,8 +85,6 @@
         "receipt": order.email,
         "prefill": {"name":order.name , "email":order.email , "contact" : order.phoneNumber},
         "theme":{"color":"#3399cc"}
-
-
 
         };
 
