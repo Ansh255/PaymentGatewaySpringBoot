@@ -12,8 +12,11 @@ import java.util.Map;
 
 @Controller
 public class StudentController {
+
     @Autowired
     private StudentService studentService;
+
+    
 
     @GetMapping("/")
     public String init(){
@@ -22,7 +25,7 @@ public class StudentController {
 
     @PostMapping(value = "/create-order" ,produces = "application/json")
     @ResponseBody
-    public ResponseEntity<StudentOrder> createOrder(@RequestBody StudentOrder studentOrder)throws  Exception{
+    public ResponseEntity<StudentOrder> createOrder(@RequestBody StudentOrder studentOrder)throws Exception{
     StudentOrder createdOrder = studentService.createOrder(studentOrder);
     return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
